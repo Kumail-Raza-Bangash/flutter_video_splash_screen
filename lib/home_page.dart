@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  // ignore: non_constant_identifier_names
   const HomePage({super.key, required String param_homepage});
 
   @override
@@ -12,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: const Text("Flutter Video Splash Screen"),
       ),
       body: const Center(
         child: Text("Home Page Body"),

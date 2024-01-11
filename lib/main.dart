@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Flutter Video Splash Screen',
       
-      home: SplashPage(),
+      home: SplashPage(param_splashpage: '',),
     );
   }
 }

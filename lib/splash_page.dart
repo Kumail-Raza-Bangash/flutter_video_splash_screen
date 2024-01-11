@@ -1,24 +1,27 @@
 import 'dart:async';
 
+// ignore: unnecessary_import
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_video_splash_screen/home_page.dart';
 import 'package:video_player/video_player.dart';
 
+
 class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+  // ignore: non_constant_identifier_names
+  const SplashPage({super.key, required String param_splashpage});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  State<StatefulWidget> createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
-
-   late VideoPlayerController _controller;
+  late VideoPlayerController _controller;
   bool _visible = false;
 
-   @override
-     void initState() {
+  @override
+  void initState() {
     super.initState();
 
     SystemChrome.setPreferredOrientations([
@@ -45,11 +48,13 @@ class _SplashPageState extends State<SplashPage> {
     });
   }
 
-@override
+  @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    if (_controller != null) {
+      _controller.dispose();
     }
+  }
 
   _getVideoBackground() {
     return AnimatedOpacity(
@@ -85,6 +90,4 @@ class _SplashPageState extends State<SplashPage> {
       ),
     );
   }
-
 }
-
