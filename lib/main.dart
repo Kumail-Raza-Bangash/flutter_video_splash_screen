@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Flutter Splash Screen',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SplashPage(),
+        home: const SplashPage(),
       ),
     );
   }

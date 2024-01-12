@@ -1,30 +1,30 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_video_splash_screen/provider/splash_screen_provider.dart';
 import 'package:flutter_video_splash_screen/screen/home_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
-  
+class _SplashPageState extends State<SplashPage>
+    with SingleTickerProviderStateMixin {
   late VideoPlayerController _controller;
+  late AnimationController _textAnimationController;
+  late Animation<double> _textOpacity;
 
   @override
   void initState() {
     super.initState();
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-
+    // Initialize video controller and animation controller
     _controller = VideoPlayerController.asset("lib/assets/videos/V001.mp4");
     _controller.initialize().then((_) {
       _controller.setLooping(true);
@@ -35,10 +35,28 @@ class _SplashPageState extends State<SplashPage> {
       });
     });
 
+    _textAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    _textOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _textAnimationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    // Start the text animation after a delay
+    Future.delayed(const Duration(seconds: 1), () {
+      _textAnimationController.forward();
+    });
+
+    // Navigate to the home page after a delay
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) =>  HomePage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
         (e) => false,
       );
     });
@@ -48,6 +66,7 @@ class _SplashPageState extends State<SplashPage> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+    _textAnimationController.dispose();
   }
 
   @override
@@ -60,7 +79,8 @@ class _SplashPageState extends State<SplashPage> {
             body: Center(
               child: Stack(
                 children: <Widget>[
-                  _getVideoBackground(provider),
+                  VideoPlayer(_controller),
+                  _getAnimatedText(provider),
                 ],
               ),
             ),
@@ -70,11 +90,24 @@ class _SplashPageState extends State<SplashPage> {
     );
   }
 
-  Widget _getVideoBackground(SplashProvider provider) {
-    return AnimatedOpacity(
-      opacity: provider.visible ? 1.0 : 0.0,
-      duration: const Duration(milliseconds: 1000),
-      child: VideoPlayer(_controller),
+  Widget _getAnimatedText(SplashProvider provider) {
+    return AnimatedBuilder(
+      animation: _textAnimationController,
+      builder: (context, child) {
+        return Center(
+          child: Opacity(
+            opacity: _textOpacity.value,
+            child: Text(
+              'LIVE WALLPAPER APP',
+               style: GoogleFonts.lato( 
+               color: Colors.white,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+                ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

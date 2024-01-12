@@ -15,13 +15,13 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('HOME PAGE'),
       ),
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("HOME PAGE")
+            Text("Flutter Splash Screen Video using Provider")
           ],
         ),
       ),
