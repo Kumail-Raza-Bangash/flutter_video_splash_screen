@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_video_splash_screen/provider/splash_screen_provider.dart';
-import 'package:flutter_video_splash_screen/screen/splash_page.dart';
+import 'package:flutter_video_splash_screen/screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -8,17 +8,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => SplashProvider()),
+        ChangeNotifierProvider(create: (context) => SplashProvider()),
         // Add more providers if needed
       ],
       child: MaterialApp(
-        title: 'Flutter Video Splash Screen',
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
         home: SplashPage(),
       ),
     );

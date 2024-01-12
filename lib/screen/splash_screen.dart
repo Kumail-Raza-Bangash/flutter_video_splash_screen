@@ -7,25 +7,14 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
+
   @override
   State<SplashPage> createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SplashPageProvider(),
-    );
-  }
-}
-
-class SplashPageProvider extends StatefulWidget {
-  @override
-  _SplashPageProviderState createState() => _SplashPageProviderState();
-}
-
-class _SplashPageProviderState extends State<SplashPageProvider> {
+  
   late VideoPlayerController _controller;
 
   @override
@@ -36,7 +25,7 @@ class _SplashPageProviderState extends State<SplashPageProvider> {
       DeviceOrientation.portraitUp,
     ]);
 
-    _controller = VideoPlayerController.asset("lib/assets/videos/V002.mp4");
+    _controller = VideoPlayerController.asset("lib/assets/videos/V001.mp4");
     _controller.initialize().then((_) {
       _controller.setLooping(true);
       Timer(const Duration(milliseconds: 100), () {
@@ -49,7 +38,7 @@ class _SplashPageProviderState extends State<SplashPageProvider> {
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) =>  HomePage()),
         (e) => false,
       );
     });
@@ -89,5 +78,3 @@ class _SplashPageProviderState extends State<SplashPageProvider> {
     );
   }
 }
-
-
