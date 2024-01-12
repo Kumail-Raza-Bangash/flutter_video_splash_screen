@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_video_splash_screen/home_page.dart';
+import 'package:flutter_video_splash_screen/screen/home_page.dart';
 import 'package:video_player/video_player.dart';
 
 
@@ -51,10 +51,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void dispose() {
     super.dispose();
-    if (_controller != null) {
-      _controller.dispose();
+    _controller.dispose();
     }
-  }
 
   _getVideoBackground() {
     return AnimatedOpacity(

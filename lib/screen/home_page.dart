@@ -1,8 +1,9 @@
+// home_page.dart
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  // ignore: non_constant_identifier_names
-  const HomePage({super.key, required String param_homepage});
+  const HomePage({super.key, String? param_homepage});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -11,12 +12,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Flutter Video Splash Screen"),
+        title: Text('Home Page'),
       ),
       body: const Center(
-        child: Text("Home Page Body"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Your custom picture, video, and gif widgets here
+          ],
+        ),
       ),
     );
   }
